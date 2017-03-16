@@ -7,17 +7,19 @@
 //
 
 import Foundation
+import CoreBluetooth
 
 //MARK: Bluetooth
 typealias Byte = UInt8
-typealias BLEPacket = [Byte]
-typealias BLEMessage = [BLEPacket]
+//typealias BLEPacket = [Byte]
+//typealias BLEMessage = [BLEPacket]
 
 class Simblee {
     
     var serialNumber: String?
     var version: String?
-    
+    var peripheral: CBPeripheral?
+
     var advertisingData : [String : Any]? = nil {
         didSet {
             if let data = advertisingData?["kCBAdvDataManufacturerData"] as? Data {
@@ -30,6 +32,11 @@ class Simblee {
         }
     }
     
+    init(advData: [String : Any], periph: CBPeripheral) {
+        self.advertisingData = advData
+        self.peripheral = periph
+    }
+    
     class func extractSerialNumber(advertisementData: [String : Any]) -> String {
         let data = advertisementData["kCBAdvDataManufacturerData"] as! Data
         let value = data[2...5]
@@ -38,5 +45,10 @@ class Simblee {
             stringValue = stringValue + String(byte, radix: 16)
         }
         return stringValue
+    }
+    
+    class func getSimblee(simblees : [Simblee], peripheral : CBPeripheral) -> Simblee? {
+        let result = simblees.filter{$0.peripheral?.identifier.uuidString == peripheral.identifier.uuidString}
+        return result.first
     }
 }

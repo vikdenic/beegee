@@ -8,11 +8,6 @@
 
 import Foundation
 
-//MARK: Bluetooth
-typealias Byte = UInt8
-typealias BLEPacket = [Byte]
-typealias BLEMessage = [BLEPacket]
-
 //MARK: Extensions
 extension Data {
     func convertToBytes() -> [Byte] {
@@ -22,4 +17,13 @@ extension Data {
         return result
     }
     
+}
+
+extension UInt16 {
+    func twoBytes() -> [Byte] {
+        var value : [Byte] = Array()
+        value.append(Byte(self / UInt16(256)))
+        value.append(Byte(self - (UInt16(value[0]) * UInt16(256))))
+        return value
+    }
 }

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Beejee.xcodeproj">
+      location = "self:/Users/vikdenic/Documents/Beejee/Beegee.xcodeproj">
    </FileRef>
 </Workspace>

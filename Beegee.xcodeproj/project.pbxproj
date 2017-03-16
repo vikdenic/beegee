@@ -14,10 +14,12 @@
 		F5CE85491E7AE95100992FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5CE85471E7AE95100992FA7 /* LaunchScreen.storyboard */; };
 		F5CE85511E7AEA3200992FA7 /* Simblee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85501E7AEA3200992FA7 /* Simblee.swift */; };
 		F5CE85531E7AEB0600992FA7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85521E7AEB0600992FA7 /* Extensions.swift */; };
+		F5CE85551E7AED7800992FA7 /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85541E7AED7800992FA7 /* Bluetooth.swift */; };
+		F5CE85571E7AEDC700992FA7 /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85561E7AEDC700992FA7 /* Diagnostics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F5CE853B1E7AE95100992FA7 /* Beejee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beejee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5CE853B1E7AE95100992FA7 /* Beegee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beegee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5CE853E1E7AE95100992FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5CE85401E7AE95100992FA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F5CE85431E7AE95100992FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -26,6 +28,8 @@
 		F5CE854A1E7AE95100992FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5CE85501E7AEA3200992FA7 /* Simblee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simblee.swift; sourceTree = "<group>"; };
 		F5CE85521E7AEB0600992FA7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F5CE85541E7AED7800992FA7 /* Bluetooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
+		F5CE85561E7AEDC700992FA7 /* Diagnostics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +46,7 @@
 		F5CE85321E7AE95100992FA7 = {
 			isa = PBXGroup;
 			children = (
-				F5CE853D1E7AE95100992FA7 /* Beejee */,
+				F5CE853D1E7AE95100992FA7 /* Beegee */,
 				F5CE853C1E7AE95100992FA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,32 +54,35 @@
 		F5CE853C1E7AE95100992FA7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F5CE853B1E7AE95100992FA7 /* Beejee.app */,
+				F5CE853B1E7AE95100992FA7 /* Beegee.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F5CE853D1E7AE95100992FA7 /* Beejee */ = {
+		F5CE853D1E7AE95100992FA7 /* Beegee */ = {
 			isa = PBXGroup;
 			children = (
-				F5CE853E1E7AE95100992FA7 /* AppDelegate.swift */,
-				F5CE85501E7AEA3200992FA7 /* Simblee.swift */,
-				F5CE85401E7AE95100992FA7 /* ViewController.swift */,
-				F5CE85521E7AEB0600992FA7 /* Extensions.swift */,
 				F5CE85421E7AE95100992FA7 /* Main.storyboard */,
+				F5CE853E1E7AE95100992FA7 /* AppDelegate.swift */,
+				F5CE85401E7AE95100992FA7 /* ViewController.swift */,
+				F5CE85541E7AED7800992FA7 /* Bluetooth.swift */,
+				F5CE85501E7AEA3200992FA7 /* Simblee.swift */,
+				F5CE85521E7AEB0600992FA7 /* Extensions.swift */,
+				F5CE85561E7AEDC700992FA7 /* Diagnostics.swift */,
 				F5CE85451E7AE95100992FA7 /* Assets.xcassets */,
-				F5CE85471E7AE95100992FA7 /* LaunchScreen.storyboard */,
 				F5CE854A1E7AE95100992FA7 /* Info.plist */,
+				F5CE85471E7AE95100992FA7 /* LaunchScreen.storyboard */,
 			);
+			name = Beegee;
 			path = Beejee;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F5CE853A1E7AE95100992FA7 /* Beejee */ = {
+		F5CE853A1E7AE95100992FA7 /* Beegee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F5CE854D1E7AE95100992FA7 /* Build configuration list for PBXNativeTarget "Beejee" */;
+			buildConfigurationList = F5CE854D1E7AE95100992FA7 /* Build configuration list for PBXNativeTarget "Beegee" */;
 			buildPhases = (
 				F5CE85371E7AE95100992FA7 /* Sources */,
 				F5CE85381E7AE95100992FA7 /* Frameworks */,
@@ -85,9 +92,9 @@
 			);
 			dependencies = (
 			);
-			name = Beejee;
+			name = Beegee;
 			productName = Beejee;
-			productReference = F5CE853B1E7AE95100992FA7 /* Beejee.app */;
+			productReference = F5CE853B1E7AE95100992FA7 /* Beegee.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -107,7 +114,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F5CE85361E7AE95100992FA7 /* Build configuration list for PBXProject "Beejee" */;
+			buildConfigurationList = F5CE85361E7AE95100992FA7 /* Build configuration list for PBXProject "Beegee" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -120,7 +127,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F5CE853A1E7AE95100992FA7 /* Beejee */,
+				F5CE853A1E7AE95100992FA7 /* Beegee */,
 			);
 		};
 /* End PBXProject section */
@@ -144,8 +151,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5CE85511E7AEA3200992FA7 /* Simblee.swift in Sources */,
+				F5CE85551E7AED7800992FA7 /* Bluetooth.swift in Sources */,
 				F5CE85411E7AE95100992FA7 /* ViewController.swift in Sources */,
 				F5CE853F1E7AE95100992FA7 /* AppDelegate.swift in Sources */,
+				F5CE85571E7AEDC700992FA7 /* Diagnostics.swift in Sources */,
 				F5CE85531E7AEB0600992FA7 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +301,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F5CE85361E7AE95100992FA7 /* Build configuration list for PBXProject "Beejee" */ = {
+		F5CE85361E7AE95100992FA7 /* Build configuration list for PBXProject "Beegee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5CE854B1E7AE95100992FA7 /* Debug */,
@@ -301,7 +310,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F5CE854D1E7AE95100992FA7 /* Build configuration list for PBXNativeTarget "Beejee" */ = {
+		F5CE854D1E7AE95100992FA7 /* Build configuration list for PBXNativeTarget "Beegee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5CE854E1E7AE95100992FA7 /* Debug */,
