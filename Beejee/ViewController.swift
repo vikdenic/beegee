@@ -19,6 +19,10 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
         }
         
+        Bluetooth.sharedInstance.lostSimblee = { simblee in
+            self.tableView.reloadData()
+        }
+        
         Bluetooth.sharedInstance.scanStateChanged = { state in
             self.tableView.reloadData()
         }

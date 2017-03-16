@@ -11,6 +11,8 @@ import CoreBluetooth
 
 let kBGRestoreId = "beegeeCentral"
 let kBGCustomUUID = "80988420-2226-4A51-9D1B-402E6F316E3C"
+let kTimerFrequency = 1.0
+let kMinCutoffTime = -3.3
 
 class Bluetooth: NSObject {
     
@@ -21,7 +23,9 @@ class Bluetooth: NSObject {
     var simblees = [Simblee]()
     
     var foundSimblee : ((_ simblee: Simblee?) -> ())? = nil
+    var lostSimblee : ((_ mirror: Simblee?) -> ())? = nil
     var scanStateChanged : ((_ state: CBManagerState) -> ())? = nil
+    var timer = Timer()
     
     override init() {
         super.init()
@@ -30,6 +34,8 @@ class Bluetooth: NSObject {
         
         self.centralManager = CBCentralManager(delegate: self, queue: nil, options:
             [ CBCentralManagerOptionRestoreIdentifierKey : [kBGRestoreId], CBCentralManagerScanOptionAllowDuplicatesKey : true, CBCentralManagerScanOptionSolicitedServiceUUIDsKey : [bgServiceID] ])
+        
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(kTimerFrequency), target: self, selector: #selector(monitorSimblees), userInfo: nil, repeats: true)
     }
     
     //MARK: Actions
@@ -44,6 +50,21 @@ class Bluetooth: NSObject {
         self.centralManager.stopScan()
     }
     
+    func monitorSimblees() {
+        var theLostSimblee: Simblee?
+        for simblee in simblees {
+            if (simblee.lastSeen?.timeIntervalSinceNow)! < kMinCutoffTime {
+                theLostSimblee = simblee
+            }
+        }
+        
+        simblees = simblees.filter() {($0.lastSeen?.timeIntervalSinceNow)! > kMinCutoffTime} //updates array
+        
+        if let theLostSimblee = theLostSimblee {
+            lostSimblee?(theLostSimblee)
+        }
+    }
+    
 }
 
 extension Bluetooth: CBCentralManagerDelegate {
@@ -52,13 +73,21 @@ extension Bluetooth: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         Diagnostics.writeToPlist("didDiscover peripheral")
         
-        let simblee = Simblee(advData: advertisementData, periph: peripheral)
         //  If our mirrors array contains a mirror representing that peripheral
-        if let _ = Simblee.getSimblee(simblees: simblees, peripheral: peripheral) {
+        if let existingSimblee = Simblee.getSimblee(simblees: simblees, peripheral: peripheral) {
+            existingSimblee.lastSeen = Date()
             print("Simblee already detected")
         } else { //Otherwise, create a new PhysicalMirror out of the discovered peripheral
+            let simblee = Simblee(advData: advertisementData, periph: peripheral)
             simblees.append(simblee)
             self.foundSimblee?(simblee)
+            print("New Simblee detected")
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        if let simblee = Simblee.getSimblee(simblees: simblees, peripheral: peripheral) {
+            lostSimblee?(simblee)
         }
     }
 

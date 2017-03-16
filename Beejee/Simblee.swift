@@ -19,6 +19,7 @@ class Simblee {
     var serialNumber: String?
     var version: String?
     var peripheral: CBPeripheral?
+    var lastSeen: Date?
 
     var advertisingData : [String : Any]? = nil {
         didSet {
@@ -35,6 +36,7 @@ class Simblee {
     init(advData: [String : Any], periph: CBPeripheral) {
         self.advertisingData = advData
         self.peripheral = periph
+        self.lastSeen = Date()
     }
     
     class func extractSerialNumber(advertisementData: [String : Any]) -> String {
