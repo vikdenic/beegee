@@ -21,6 +21,7 @@ class Bluetooth: NSObject {
     var simblees = [Simblee]()
     
     var foundSimblee : ((_ simblee: Simblee?) -> ())? = nil
+    var scanStateChanged : ((_ state: CBManagerState) -> ())? = nil
     
     override init() {
         super.init()
@@ -64,14 +65,13 @@ extension Bluetooth: CBCentralManagerDelegate {
     @available(iOS 5.0, *)
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         Diagnostics.writeToPlist("centralManagerDidUpdateState: \(central.state)")
-        
         switch central.state {
         case .poweredOn:
             startScan()
-            return
         default :
-            return
+            simblees.removeAll()
         }
+        scanStateChanged?(central.state)
     }
 
     //Restore

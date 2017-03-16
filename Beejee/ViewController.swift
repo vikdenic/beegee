@@ -18,6 +18,10 @@ class ViewController: UIViewController {
         Bluetooth.sharedInstance.foundSimblee = { simblee in
             self.tableView.reloadData()
         }
+        
+        Bluetooth.sharedInstance.scanStateChanged = { state in
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +39,10 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kCellId)
-        cell?.textLabel?.text = Bluetooth.sharedInstance.simblees[indexPath.row].serialNumber
+        
+        let simblee = Bluetooth.sharedInstance.simblees[indexPath.row]
+        cell?.textLabel?.text = simblee.peripheral?.identifier.uuidString
+        cell?.detailTextLabel?.text = simblee.advertisingData?["kCBAdvDataLocalName"] as? String
         return cell!
     }
 }
