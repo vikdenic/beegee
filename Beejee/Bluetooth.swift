@@ -8,9 +8,12 @@
 
 import Foundation
 import CoreBluetooth
+import UserNotifications
 
 let kBGRestoreId = "beegeeCentral"
 let kBGCustomUUID = "80988420-2226-4A51-9D1B-402E6F316E3C"
+var bgServiceID: CBUUID = CBUUID(string: kBGCustomUUID)
+
 let kTimerFrequency = 1.0
 let kMinCutoffTime = -3.3
 
@@ -19,7 +22,6 @@ class Bluetooth: NSObject {
     static let sharedInstance = Bluetooth()
     
     var centralManager: CBCentralManager!
-    var bgServiceID: CBUUID = CBUUID(string: kBGCustomUUID)
     var simblees = [Simblee]()
     
     var foundSimblee : ((_ simblee: Simblee?) -> ())? = nil
@@ -33,8 +35,7 @@ class Bluetooth: NSObject {
         Diagnostics.writeToPlist("Bluetooth class init")
         
         self.centralManager = CBCentralManager(delegate: self, queue: nil, options:
-            [ CBCentralManagerOptionRestoreIdentifierKey : [kBGRestoreId], CBCentralManagerScanOptionAllowDuplicatesKey : true, CBCentralManagerScanOptionSolicitedServiceUUIDsKey : [bgServiceID] ])
-        
+            [ CBCentralManagerOptionRestoreIdentifierKey : [kBGRestoreId], CBCentralManagerScanOptionAllowDuplicatesKey : false, CBCentralManagerScanOptionSolicitedServiceUUIDsKey : [bgServiceID] ])
         timer = Timer.scheduledTimer(timeInterval: TimeInterval(kTimerFrequency), target: self, selector: #selector(monitorSimblees), userInfo: nil, repeats: true)
     }
     
@@ -42,7 +43,7 @@ class Bluetooth: NSObject {
     func startScan() {
         Diagnostics.writeToPlist("startScan for peripherals with UUID : \(bgServiceID)")
         
-        self.centralManager.scanForPeripherals(withServices: [bgServiceID], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+        self.centralManager.scanForPeripherals(withServices: [bgServiceID], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true, CBCentralManagerScanOptionSolicitedServiceUUIDsKey : [bgServiceID]])
     }
     
     func stopScan() {
@@ -82,6 +83,8 @@ extension Bluetooth: CBCentralManagerDelegate {
             simblees.append(simblee)
             self.foundSimblee?(simblee)
             print("New Simblee detected")
+            UNNotification.scheduleNotif(title: "Found new Simblee", body: (simblee.peripheral?.identifier.uuidString)!)
+            Diagnostics.writeToPlist("Found new peripheral : \((simblee.peripheral?.identifier.uuidString)!)")
         }
     }
     
@@ -106,5 +109,7 @@ extension Bluetooth: CBCentralManagerDelegate {
     //Restore
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         Diagnostics.writeToPlist("willRestoreState")
+        let _ = Bluetooth.sharedInstance
+        Bluetooth.sharedInstance.startScan()
     }
 }

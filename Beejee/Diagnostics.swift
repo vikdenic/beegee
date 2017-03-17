@@ -52,20 +52,27 @@ class Diagnostics {
         let stringToWrite = "\(format.string(from: now)) --- \(message)\n"
         
         print(stringToWrite)
-        //#if DEBUG
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        var pathURL = URL(string: path)
-        pathURL = pathURL?.appendingPathComponent(logFileName)
-        if !FileManager.default.fileExists(atPath: path) {
-            FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        let fileName = "\(documentsDirectory)/debug.txt"
+        do{
+            try stringToWrite.write(toFile: fileName, atomically: false, encoding: String.Encoding.utf8)
+        }catch _ {
+            print("error writing file to documents directory")
         }
-        
-        
-        let file = FileHandle(forUpdatingAtPath: path)
-        file?.seekToEndOfFile()
-        file?.write(stringToWrite.data(using: String.Encoding.utf8, allowLossyConversion: false)!)
-        file?.closeFile()
-        //#endif
+    }
+    
+    func saveFile() {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        let fileName = "\(documentsDirectory)/debug.txt"
+        let content = "Hello World"
+        do{
+            try content.write(toFile: fileName, atomically: false, encoding: String.Encoding.utf8)
+        }catch _ {
+            
+        }
     }
 }
 
