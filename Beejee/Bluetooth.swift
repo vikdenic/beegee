@@ -33,7 +33,6 @@ class Bluetooth: NSObject {
     
     //MARK: Actions
     func startScan() {
-        
         self.centralManager.scanForPeripherals(withServices: [bgServiceID], options: [CBCentralManagerScanOptionAllowDuplicatesKey : true, CBCentralManagerScanOptionSolicitedServiceUUIDsKey : [bgServiceID]])
     }
     
@@ -46,7 +45,6 @@ extension Bluetooth: CBCentralManagerDelegate {
         
         //  If our simblees array contains a mirror representing that peripheral
         if let existingSimblee = Simblee.getSimblee(simblees: simblees, peripheral: peripheral) {
-            existingSimblee.lastSeen = Date()
             print("Simblee already detected")
         } else { //Otherwise, create a new Simblee instance from the discovered peripheral
             let simblee = Simblee(periph: peripheral)
