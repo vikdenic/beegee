@@ -9,32 +9,16 @@
 import Foundation
 import CoreBluetooth
 
-//MARK: Bluetooth
 typealias Byte = UInt8
-//typealias BLEPacket = [Byte]
-//typealias BLEMessage = [BLEPacket]
 
-class Simblee {
+class Simblee { //This class represents the peripheral objects we are scanning for
     
     var serialNumber: String?
     var version: String?
     var peripheral: CBPeripheral?
     var lastSeen: Date?
 
-    var advertisingData : [String : Any]? = nil {
-        didSet {
-            if let data = advertisingData?["kCBAdvDataManufacturerData"] as? Data {
-                serialNumber = Simblee.extractSerialNumber(advertisementData: advertisingData! as [String : Any])
-                let bytes = data.convertToBytes()
-                if bytes.count > 8 {
-                    version = String(bytes[6]) + "." + String(bytes[7]) + "." + String(bytes[8])
-                }
-            }
-        }
-    }
-    
-    init(advData: [String : Any], periph: CBPeripheral) {
-        self.advertisingData = advData
+    init(periph: CBPeripheral) {
         self.peripheral = periph
         self.lastSeen = Date()
     }

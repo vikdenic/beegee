@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    let kCellId = "deviceCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +27,6 @@ class ViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -41,11 +36,10 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellId)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell")
         
         let simblee = Bluetooth.sharedInstance.simblees[indexPath.row]
         cell?.textLabel?.text = simblee.peripheral?.identifier.uuidString
-        cell?.detailTextLabel?.text = simblee.advertisingData?["kCBAdvDataLocalName"] as? String
         return cell!
     }
 }

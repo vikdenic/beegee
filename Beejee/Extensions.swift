@@ -7,8 +7,33 @@
 //
 
 import Foundation
+import UserNotifications
 
-//MARK: Extensions
+//MARK: Notification
+@available(iOS 10.0, *)
+extension UNNotification {
+    class func scheduleNotif(title: String, body: String) {
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound(named: "notif.wav")
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1,
+                                                        repeats: false)
+        
+        let identifier = "UYLLocalNotification"
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+            if let _ = error {
+                // Something went wrong
+            }
+        })
+    }
+}
+
+//MARK: For processing data from our Simblee peripherals
 extension Data {
     func convertToBytes() -> [Byte] {
         let count = self.count / MemoryLayout<Byte>.size

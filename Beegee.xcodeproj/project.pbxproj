@@ -15,7 +15,6 @@
 		F5CE85511E7AEA3200992FA7 /* Simblee.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85501E7AEA3200992FA7 /* Simblee.swift */; };
 		F5CE85531E7AEB0600992FA7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85521E7AEB0600992FA7 /* Extensions.swift */; };
 		F5CE85551E7AED7800992FA7 /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85541E7AED7800992FA7 /* Bluetooth.swift */; };
-		F5CE85571E7AEDC700992FA7 /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE85561E7AEDC700992FA7 /* Diagnostics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		F5CE85501E7AEA3200992FA7 /* Simblee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simblee.swift; sourceTree = "<group>"; };
 		F5CE85521E7AEB0600992FA7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F5CE85541E7AED7800992FA7 /* Bluetooth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
-		F5CE85561E7AEDC700992FA7 /* Diagnostics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +66,6 @@
 				F5CE85541E7AED7800992FA7 /* Bluetooth.swift */,
 				F5CE85501E7AEA3200992FA7 /* Simblee.swift */,
 				F5CE85521E7AEB0600992FA7 /* Extensions.swift */,
-				F5CE85561E7AEDC700992FA7 /* Diagnostics.swift */,
 				F5CE85451E7AE95100992FA7 /* Assets.xcassets */,
 				F5CE854A1E7AE95100992FA7 /* Info.plist */,
 				F5CE85471E7AE95100992FA7 /* LaunchScreen.storyboard */,
@@ -154,7 +151,6 @@
 				F5CE85551E7AED7800992FA7 /* Bluetooth.swift in Sources */,
 				F5CE85411E7AE95100992FA7 /* ViewController.swift in Sources */,
 				F5CE853F1E7AE95100992FA7 /* AppDelegate.swift in Sources */,
-				F5CE85571E7AEDC700992FA7 /* Diagnostics.swift in Sources */,
 				F5CE85531E7AEB0600992FA7 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +313,7 @@
 				F5CE854F1E7AE95100992FA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
